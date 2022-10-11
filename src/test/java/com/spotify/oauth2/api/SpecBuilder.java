@@ -13,8 +13,15 @@ public class SpecBuilder { //lekcja 201, 202
         return new RequestSpecBuilder().
                 setBaseUri("https://api.spotify.com").
                 setBasePath("/v1").
-                //addHeader("Authorization", "Bearer " + access_token).
                 setContentType(ContentType.JSON).
+                log(LogDetail.ALL).
+                build();        //--> lekcja 81
+    }
+
+    public static RequestSpecification getAccountRequestSpec() { //207
+        return new RequestSpecBuilder().
+                setBaseUri("https://accounts.spotify.com").
+                setContentType(ContentType.URLENC).
                 log(LogDetail.ALL).
                 build();        //--> lekcja 81
     }

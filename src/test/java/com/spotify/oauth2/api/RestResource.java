@@ -1,15 +1,11 @@
 package com.spotify.oauth2.api;
 
-import com.spotify.oauth2.pojo.Playlist;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 
-import javax.print.attribute.HashAttributeSet;
-
 import java.util.HashMap;
 
-import static com.spotify.oauth2.api.SpecBuilder.getRequestSpec;
-import static com.spotify.oauth2.api.SpecBuilder.getResponseSpec;
+import static com.spotify.oauth2.api.SpecBuilder.*;
 import static io.restassured.RestAssured.given;
 
 public class RestResource { //lesson 203
@@ -24,12 +20,9 @@ public class RestResource { //lesson 203
                 response();
     }
 
-    public static Response postAccount(HashMap<String, String> formParams) { //lesson 206
-        return given().
-                baseUri("https://accounts.spotify.com").
-                contentType(ContentType.URLENC).
+    public static Response postAccount(HashMap<String, String> formParams) { //lesson 206, 207
+        return given(getAccountRequestSpec()).
                 formParams(formParams).
-                log().all().
         when().post("/api/token").
         then().spec(getResponseSpec()).
                 extract().
