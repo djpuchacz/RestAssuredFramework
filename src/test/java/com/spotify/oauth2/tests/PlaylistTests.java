@@ -4,6 +4,7 @@ import com.spotify.oauth2.api.applicationApi.PlaylistApi;
 import com.spotify.oauth2.pojo.Error;
 import com.spotify.oauth2.pojo.Playlist;
 
+import com.spotify.oauth2.utils.DataLoader;
 import io.restassured.response.Response;
 import org.testng.annotations.Test;
 
@@ -30,13 +31,13 @@ public class PlaylistTests {
     }
 
     @Test
-    public void ShouldBeAbleToGetAPlaylist() { //lekcja 194, 202
+    public void ShouldBeAbleToGetAPlaylist() { //lekcja 194, 202, 211
         Playlist requestPlaylist = new Playlist().
                 setName("New Playlist").
                 setDescription("New playlist description").
                 setPublic(false);
 
-        Response response = PlaylistApi.get("3m5qfL92Ytzj3q3AGxLth2");
+        Response response = PlaylistApi.get(DataLoader.getInstance().getGetPlaylistId());
         assertThat(response.statusCode(), equalTo(200));
 
         Playlist responsePlaylist = response.as(Playlist.class);
@@ -53,7 +54,7 @@ public class PlaylistTests {
                 setDescription("New playlist description").
                 setPublic(false);
 
-        Response response = PlaylistApi.update("1wdZvwLxNRb2hab8V9Jpm9", requestPlaylist);
+        Response response = PlaylistApi.update(DataLoader.getInstance().getUpdatePlaylistId(), requestPlaylist);
         assertThat(response.statusCode(), equalTo(200));
     }
 

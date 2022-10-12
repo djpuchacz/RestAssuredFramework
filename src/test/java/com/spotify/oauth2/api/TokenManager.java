@@ -1,5 +1,6 @@
 package com.spotify.oauth2.api;
 
+import com.spotify.oauth2.utils.ConfigLoader;
 import io.restassured.response.Response;
 
 import java.time.Instant;
@@ -28,10 +29,10 @@ public class TokenManager { //204, 205
 
     private static Response renewToken() {
         HashMap<String, String> formParams = new HashMap<>();
-        formParams.put("client_id", "a24b35f64dde4aa5a4457e97dd58654a");
-        formParams.put("client_secret", "a1a21de6f83c4866bf84c725f7531175");
-        formParams.put("refresh_token", "AQCGgk1uswegPwbANk1e3nnNXO76zV0C6BHqvDYK73cfMk8HGxClprYTQgd83_nzySjO_9xjyhM_2ol7881Kfv10PI1yRWAkgHSo1sk3ma2MctcoH-KIN9dPEOgb-YCR6kU");
-        formParams.put("grant_type", "refresh_token");
+        formParams.put("client_id", ConfigLoader.getInstance().getClientId());
+        formParams.put("client_secret", ConfigLoader.getInstance().getClientSecret());
+        formParams.put("refresh_token", ConfigLoader.getInstance().getRefreshToken());
+        formParams.put("grant_type", ConfigLoader.getInstance().getGrantType());
 
         Response response = RestResource.postAccount(formParams);
 
