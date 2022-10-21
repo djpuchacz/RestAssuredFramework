@@ -1,6 +1,4 @@
 
-7
-pom.xml,4\4\442292b8a7efeabbe4cc176709b833b1792140ec
 j
 :src/test/java/com/spotify/oauth2/pojo/ExternalUrls__1.java,b\3\b3a947fc620cc5404add6514a43fabf78409f5db
 d
@@ -9,3 +7,15 @@ a
 1src/test/java/com/spotify/oauth2/pojo/Tracks.java,8\9\89bf12aaa886f1bb6265ab76427838d511f94556
 g
 7src/test/java/com/spotify/oauth2/pojo/ExternalUrls.java,d\d\dd8b561f009d15846c85426769b50765b389de7f
+`
+0src/test/java/com/spotify/oauth2/pojo/Owner.java,5\c\5ce39bd5cb6fd1092aa2acbcdb31356b80afaedf
+e
+5src/test/java/com/spotify/oauth2/pojo/InnerError.java,a\c\acda50152d6429f0abc0f04386a880cf6c167fe8
+h
+8src/test/java/com/spotify/oauth2/utils/ConfigLoader.java,7\6\76a9c971e970fdaf17a01fa8a64eb2d88b785cad
+f
+6src/test/java/com/spotify/oauth2/api/RestResource.java,b\c\bc5bb4a67feca27c46028c65d9e53c8cc48d5954
+_
+/src/test/java/com/spotify/oauth2/api/Route.java,7\f\7f77ab1dc3813679e12e8df55f48c19c697f93d2
+f
+6src/test/java/com/spotify/oauth2/api/TokenManager.java,3\4\34042e8943aa4f44195ed2758e92558ceed7a477
