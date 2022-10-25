@@ -1,5 +1,6 @@
 package com.spotify.oauth2.tests;
 
+import com.spotify.oauth2.api.StatusCode;
 import com.spotify.oauth2.api.applicationApi.PlaylistApi;
 import com.spotify.oauth2.pojo.Error;
 import com.spotify.oauth2.pojo.Playlist;
@@ -36,14 +37,14 @@ public class PlaylistTests {
     }
 
     @Step //lesson 225
-    public void assertStatusCode(int actualStatusCode, int expectedStatusCode){
-        assertThat(actualStatusCode, equalTo(expectedStatusCode));
+    public void assertStatusCode(int actualStatusCode, StatusCode statusCode){
+        assertThat(actualStatusCode, equalTo(statusCode.code));
     }
 
     @Step
-    public void assertError(Error responseErr, int expectedStatusCode, String expectedMsg) {
-        assertThat(responseErr.getError().getStatus(), equalTo(expectedStatusCode));
-        assertThat(responseErr.getError().getMessage(), equalTo(expectedMsg));
+    public void assertError(Error responseErr, StatusCode statusCode) {
+        assertThat(responseErr.getError().getStatus(), equalTo(statusCode.code));
+        assertThat(responseErr.getError().getMessage(), equalTo(statusCode.msg));
     }
 
     @Story("create a playlist story")
@@ -56,7 +57,7 @@ public class PlaylistTests {
     public void ShouldBeAbleToCreateAPlaylist() { //lessons 193, 198, 199, 201, 202, 212, 230
         Playlist requestPlaylist = playlistBuilder(generateName(), generateDescription(),false);
         Response response = PlaylistApi.post(requestPlaylist);
-        assertStatusCode(response.statusCode(), 201);
+        assertStatusCode(response.statusCode(), StatusCode.CODE_201);
         Playlist responsePlaylist = response.as(Playlist.class);
         assertPlaylistEqual(responsePlaylist, requestPlaylist); //or:
         //assertPlaylistEqual(response.as(Playlist.class), requestPlaylist);
@@ -66,7 +67,7 @@ public class PlaylistTests {
     public void ShouldBeAbleToGetAPlaylist() { //lekcja 194, 202, 211, 212
         Playlist requestPlaylist = playlistBuilder("New Playlist", "New playlist description", false);
         Response response = PlaylistApi.get(DataLoader.getInstance().getGetPlaylistId());
-        assertStatusCode(response.statusCode(), 200);
+        assertStatusCode(response.statusCode(), StatusCode.CODE_200);
         assertPlaylistEqual(response.as(Playlist.class), requestPlaylist);
     }
 
@@ -74,7 +75,7 @@ public class PlaylistTests {
     public void ShouldBeAbleToUpdateAPlaylist() { //lekcja 195, 202, 212
         Playlist requestPlaylist = playlistBuilder(generateName(), generateDescription(), false);
         Response response = PlaylistApi.update(DataLoader.getInstance().getUpdatePlaylistId(), requestPlaylist);
-        assertStatusCode(response.statusCode(), 200);
+        assertStatusCode(response.statusCode(), StatusCode.CODE_200);
     }
 
     @Story("create a playlist story")
@@ -82,17 +83,17 @@ public class PlaylistTests {
     public void ShouldNotBeAbleToCreateAPlaylistWithName() { //lekcja 196, 199, 202, 212
         Playlist requestPlaylist = playlistBuilder("",generateDescription(), false);
         Response response = PlaylistApi.post(requestPlaylist);
-        assertStatusCode(response.statusCode(), 400);
-        assertError(response.as(Error.class), 400, "Missing required field: name");
+        assertStatusCode(response.statusCode(), StatusCode.CODE_400);
+        assertError(response.as(Error.class), StatusCode.CODE_400);
     }
+
     @Story("create a playlist story")
     @Test
     public void ShouldNotBeAbleToCreateAPlaylistWithExpiredToken() { //lekcja 196, 202
         String invalid_token = "12345";
         Playlist requestPlaylist = playlistBuilder(generateName(), generateDescription(), false);
         Response response = PlaylistApi.post(invalid_token, requestPlaylist);
-        assertStatusCode(response.statusCode(), 401);
-        assertError(response.as(Error.class), 401, "Invalid access token");
+        assertStatusCode(response.statusCode(), StatusCode.CODE_401);
+        assertError(response.as(Error.class), StatusCode.CODE_401);
     }
-
 }
