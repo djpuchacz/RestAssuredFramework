@@ -10,12 +10,13 @@ import static com.spotify.oauth2.api.Route.TOKEN;
 import static com.spotify.oauth2.api.SpecBuilder.*;
 import static io.restassured.RestAssured.given;
 
-public class RestResource { //lesson 203
+public class RestResource { //lesson 203, 229
 
     public static Response post(String path, String token, Object requestPlaylist) {
         return given(getRequestSpec()).
                 body(requestPlaylist).
-                header("Authorization", "Bearer " + token).
+                auth().oauth2(token).
+                //header("Authorization", "Bearer " + token).
         when().post(path).
         then().spec(getResponseSpec()).
                 extract().
@@ -33,7 +34,7 @@ public class RestResource { //lesson 203
 
     public static Response get(String path, String token) {
         return given(getRequestSpec()).
-                header("Authorization", "Bearer " + token).
+                auth().oauth2(token).
                 when().
                 get(path).
                 then().
@@ -44,7 +45,7 @@ public class RestResource { //lesson 203
 
     public static Response update(String path, String token, Object requestPlaylist) {
         return given(getRequestSpec()).
-                header("Authorization", "Bearer " + token).
+                auth().oauth2(token).
                 body(requestPlaylist).
                 when().put(path).
                 then().spec(getResponseSpec()).

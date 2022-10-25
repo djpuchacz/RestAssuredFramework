@@ -9,6 +9,8 @@ import io.qameta.allure.*;
 import io.restassured.response.Response;
 import org.testng.annotations.Test;
 
+import static com.spotify.oauth2.utils.FakerUtils.generateDescription;
+import static com.spotify.oauth2.utils.FakerUtils.generateName;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
@@ -51,8 +53,8 @@ public class PlaylistTests {
     @Issue("1234567")
     @Description("this is description") //lekcja 222
     @Test(description = "should be able to create a playlist") //lekcja 221
-    public void ShouldBeAbleToCreateAPlaylist() { //lessons 193, 198, 199, 201, 202, 212
-        Playlist requestPlaylist = playlistBuilder("New Playlist", "New playlist description", false);
+    public void ShouldBeAbleToCreateAPlaylist() { //lessons 193, 198, 199, 201, 202, 212, 230
+        Playlist requestPlaylist = playlistBuilder(generateName(), generateDescription(),false);
         Response response = PlaylistApi.post(requestPlaylist);
         assertStatusCode(response.statusCode(), 201);
         Playlist responsePlaylist = response.as(Playlist.class);
@@ -70,7 +72,7 @@ public class PlaylistTests {
 
     @Test
     public void ShouldBeAbleToUpdateAPlaylist() { //lekcja 195, 202, 212
-        Playlist requestPlaylist = playlistBuilder("New Playlist", "New playlist description", false);
+        Playlist requestPlaylist = playlistBuilder(generateName(), generateDescription(), false);
         Response response = PlaylistApi.update(DataLoader.getInstance().getUpdatePlaylistId(), requestPlaylist);
         assertStatusCode(response.statusCode(), 200);
     }
@@ -78,7 +80,7 @@ public class PlaylistTests {
     @Story("create a playlist story")
     @Test
     public void ShouldNotBeAbleToCreateAPlaylistWithName() { //lekcja 196, 199, 202, 212
-        Playlist requestPlaylist = playlistBuilder("", "New playlist description", false);
+        Playlist requestPlaylist = playlistBuilder("",generateDescription(), false);
         Response response = PlaylistApi.post(requestPlaylist);
         assertStatusCode(response.statusCode(), 400);
         assertError(response.as(Error.class), 400, "Missing required field: name");
@@ -87,7 +89,7 @@ public class PlaylistTests {
     @Test
     public void ShouldNotBeAbleToCreateAPlaylistWithExpiredToken() { //lekcja 196, 202
         String invalid_token = "12345";
-        Playlist requestPlaylist = playlistBuilder("New Playlist", "New playlist description", false);
+        Playlist requestPlaylist = playlistBuilder(generateName(), generateDescription(), false);
         Response response = PlaylistApi.post(invalid_token, requestPlaylist);
         assertStatusCode(response.statusCode(), 401);
         assertError(response.as(Error.class), 401, "Invalid access token");
