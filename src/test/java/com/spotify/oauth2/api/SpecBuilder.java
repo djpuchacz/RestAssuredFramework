@@ -10,11 +10,12 @@ import io.restassured.specification.ResponseSpecification;
 
 import static com.spotify.oauth2.api.Route.BASE_PATH;
 
-public class SpecBuilder { //lekcja 201, 202
+public class SpecBuilder { //lekcja 201, 202, 233
 
     public static RequestSpecification getRequestSpec() {
         return new RequestSpecBuilder().
-                setBaseUri("https://api.spotify.com").
+                setBaseUri(System.getProperty("BASE_URI")).
+                //setBaseUri("https://api.spotify.com").
                 setBasePath(BASE_PATH).
                 setContentType(ContentType.JSON).
                 addFilter(new AllureRestAssured()).

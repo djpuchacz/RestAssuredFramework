@@ -17,7 +17,7 @@ import static org.hamcrest.Matchers.equalTo;
 
 @Epic("Spotify Oauth 2.0") //lesson 224
 @Feature("Playlist API")
-public class PlaylistTests {
+public class PlaylistTests extends BaseTest { //lesson 232
 
     @Step
     public Playlist playlistBuilder(String name, String description, boolean _public) { //lesson 215 i 216
