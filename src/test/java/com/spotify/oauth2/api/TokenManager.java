@@ -22,6 +22,7 @@ public class TokenManager { //204, 205
                 System.out.println("token is good to use");
             }
         } catch (Exception e) {
+            e.printStackTrace();
             throw new RuntimeException("ABORT!!! Failed to get token");
         }
         return access_token;

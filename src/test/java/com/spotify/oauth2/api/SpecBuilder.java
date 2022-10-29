@@ -14,8 +14,8 @@ public class SpecBuilder { //lekcja 201, 202, 233
 
     public static RequestSpecification getRequestSpec() {
         return new RequestSpecBuilder().
-                //setBaseUri(System.getProperty("BASE_URI")). //233: to invoke in terminal: mvn test -DBASE_URI="https://api.spotify.com" -DACCOUNT_BASE_URI="https://accounts.spotify.com"
-                setBaseUri("https://api.spotify.com").
+                setBaseUri(System.getProperty("BASE_URI")). //233: to invoke in terminal: mvn test -DBASE_URI="https://api.spotify.com" -DACCOUNT_BASE_URI="https://accounts.spotify.com"
+                //setBaseUri("https://api.spotify.com").
                 setBasePath(BASE_PATH).
                 setContentType(ContentType.JSON).
                 addFilter(new AllureRestAssured()).
@@ -25,8 +25,8 @@ public class SpecBuilder { //lekcja 201, 202, 233
 
     public static RequestSpecification getAccountRequestSpec() { //207, 233
         return new RequestSpecBuilder().
-                //setBaseUri(System.getProperty("ACCOUNT_BASE_URI")). //233: to invoke in terminal: mvn test -DBASE_URI="https://api.spotify.com" -DACCOUNT_BASE_URI="https://accounts.spotify.com"
-                setBaseUri("https://accounts.spotify.com").
+                setBaseUri(System.getProperty("ACCOUNT_BASE_URI")). //233: to invoke in terminal: mvn test -DBASE_URI="https://api.spotify.com" -DACCOUNT_BASE_URI="https://accounts.spotify.com"
+                //setBaseUri("https://accounts.spotify.com").
                 setContentType(ContentType.URLENC).
                 addFilter(new AllureRestAssured()).
                 log(LogDetail.ALL).
