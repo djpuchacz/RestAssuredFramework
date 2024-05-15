@@ -9,7 +9,7 @@ import lombok.extern.jackson.Jacksonized;
 
 @Getter
 @Setter
-@Jacksonized //lesson 216
+@Jacksonized
 @Builder
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Error {

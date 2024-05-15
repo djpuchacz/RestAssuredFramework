@@ -6,11 +6,11 @@ import io.restassured.response.Response;
 import java.time.Instant;
 import java.util.HashMap;
 
-public class TokenManager { //204, 205
+public class TokenManager {
     private static String access_token;
     private static Instant expiry_time;
 
-    public synchronized static String getToken() { //lekcja 232
+    public synchronized static String getToken() {
         try {
             if (access_token == null || Instant.now().isAfter(expiry_time)) {
                 System.out.println("renewing token...");

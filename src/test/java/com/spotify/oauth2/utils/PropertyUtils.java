@@ -6,7 +6,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Properties;
 
-public class PropertyUtils { //lessons 209, 210
+public class PropertyUtils {
     public static Properties propertyLoader(String filePath) {
         Properties properties = new Properties();
         BufferedReader reader;
