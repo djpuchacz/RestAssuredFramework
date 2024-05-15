@@ -2,7 +2,7 @@ package com.spotify.oauth2.utils;
 
 import java.util.Properties;
 
-public class ConfigLoader { //lesson 210
+public class ConfigLoader {
     private final Properties properties;
     private static ConfigLoader configLoader;
 

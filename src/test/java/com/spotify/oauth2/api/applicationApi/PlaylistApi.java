@@ -10,9 +10,9 @@ import static com.spotify.oauth2.api.Route.PLAYLISTS;
 import static com.spotify.oauth2.api.Route.USERS;
 import static com.spotify.oauth2.api.TokenManager.getToken;
 
-public class PlaylistApi { //lessons 202, 208, 210
+public class PlaylistApi {
 
-    @Step //lesson 225
+    @Step
     public static Response post(Playlist requestPlaylist) {
         return RestResource.post(USERS + "/"+ ConfigLoader.getInstance().getUser() + PLAYLISTS, getToken(), requestPlaylist);
     }

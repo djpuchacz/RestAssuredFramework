@@ -1,6 +1,5 @@
 package com.spotify.oauth2.api;
 
-import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 
 import java.util.HashMap;
@@ -10,7 +9,7 @@ import static com.spotify.oauth2.api.Route.TOKEN;
 import static com.spotify.oauth2.api.SpecBuilder.*;
 import static io.restassured.RestAssured.given;
 
-public class RestResource { //lesson 203, 229
+public class RestResource {
 
     public static Response post(String path, String token, Object requestPlaylist) {
         return given(getRequestSpec()).
@@ -23,7 +22,7 @@ public class RestResource { //lesson 203, 229
                 response();
     }
 
-    public static Response postAccount(HashMap<String, String> formParams) { //lesson 206, 207
+    public static Response postAccount(HashMap<String, String> formParams) {
         return given(getAccountRequestSpec()).
                 formParams(formParams).
         when().post(API + TOKEN).

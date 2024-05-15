@@ -10,10 +10,10 @@ import lombok.extern.jackson.Jacksonized;
 @Value
 //@Data
 //@Getter @Setter
-@Jacksonized //lesson 216
+@Jacksonized
 @Builder
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class Playlist { //lesson 215
+public class Playlist {
 
     @JsonProperty("collaborative")
     Boolean collaborative;

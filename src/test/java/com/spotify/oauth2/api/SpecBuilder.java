@@ -10,27 +10,27 @@ import io.restassured.specification.ResponseSpecification;
 
 import static com.spotify.oauth2.api.Route.BASE_PATH;
 
-public class SpecBuilder { //lekcja 201, 202, 233
+public class SpecBuilder {
 
     public static RequestSpecification getRequestSpec() {
         return new RequestSpecBuilder().
-                //setBaseUri(System.getProperty("BASE_URI")). //233: to invoke in terminal: mvn test -DBASE_URI="https://api.spotify.com" -DACCOUNT_BASE_URI="https://accounts.spotify.com"
-                setBaseUri("https://api.spotify.com").
+                setBaseUri(System.getProperty("BASE_URI")). //enable to run in terminal: mvn test -DBASE_URI="https://api.spotify.com" -DACCOUNT_BASE_URI="https://accounts.spotify.com"
+                //setBaseUri("https://api.spotify.com").
                 setBasePath(BASE_PATH).
                 setContentType(ContentType.JSON).
                 addFilter(new AllureRestAssured()).
                 log(LogDetail.ALL).
-                build();        //--> lekcja 81
+                build();
     }
 
-    public static RequestSpecification getAccountRequestSpec() { //207, 233
+    public static RequestSpecification getAccountRequestSpec() {
         return new RequestSpecBuilder().
-                //setBaseUri(System.getProperty("ACCOUNT_BASE_URI")). //233: to invoke in terminal: mvn test -DBASE_URI="https://api.spotify.com" -DACCOUNT_BASE_URI="https://accounts.spotify.com"
-                setBaseUri("https://accounts.spotify.com").
+                setBaseUri(System.getProperty("ACCOUNT_BASE_URI")). //to invoke in terminal: mvn test -DBASE_URI="https://api.spotify.com" -DACCOUNT_BASE_URI="https://accounts.spotify.com"
+                //setBaseUri("https://accounts.spotify.com").
                 setContentType(ContentType.URLENC).
                 addFilter(new AllureRestAssured()).
                 log(LogDetail.ALL).
-                build();        //--> lekcja 81
+                build();
     }
 
     public static ResponseSpecification getResponseSpec() {

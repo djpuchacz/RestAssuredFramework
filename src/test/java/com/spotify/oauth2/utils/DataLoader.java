@@ -2,7 +2,7 @@ package com.spotify.oauth2.utils;
 
 import java.util.Properties;
 
-public class DataLoader { //lesson 211
+public class DataLoader {
     private final Properties properties;
     private static DataLoader dataLoader;
 
